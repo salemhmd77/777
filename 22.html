@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Générateur de Mot de Passe</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* إعدادات الصفحة الأساسية */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+            background-image: url('https://example.com/earth.jpg');
+            background-size: cover;
+            background-position: center;
+
+        }
+        .container {
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.6); /* خلفية داكنة لنصوص مقروءة */
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        img {
+            max-width: 100%; /* تأكد من أن الصورة تتناسب مع العرض */
+            height: auto;
+            border-radius: 10px; /* حواف دائرية للصورة */
+            margin-bottom: 20px;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #363636;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        /* تنسيق صندوق توليد كلمة المرور */
+        .password-generator-container {
+            width: 100%;
+            max-width: 420px;
+            padding: 25px;
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .password-generator-container h2 {
+            color: #4A4A4A;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            font-size: 1.5em;
+        }
+
+        /* تنسيق حقل كلمة المرور */
+        .password-display {
+            width: 100%;
+            padding: 12px;
+            font-size: 18px;
+            text-align: center;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            color: #333;
+            background-color: #fafafa;
+            font-weight: 500;
+            transition: border-color 0.3s;
+        }
+
+        .password-display:focus {
+            border-color: #4CAF50;
+        }
+
+        /* إعدادات الخيارات */
+        .options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 10px 0;
+            font-size: 15px;
+            color: #333;
+        }
+
+        /* تنسيق طول كلمة المرور */
+        .options input[type="number"] {
+            width: 70px;
+            padding: 7px;
+            text-align: center;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-size: 15px;
+        }
+
+        /* تنسيق الزر */
+        .generate-btn {
+            width: 100%;
+            padding: 12px;
+            margin-top: 15px;
+            background-color: #4CAF50;
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .generate-btn:hover {
+            background-color: #45a049;
+        }
+
+        /* تنسيق الرابط */
+        .generate-btn:active {
+            background-color: #3e8e41;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="password-generator-container">
+        <h2>Générateur de Mot de Passe</h2>
+        <input type="text" id="password-display" class="password-display" readonly placeholder="كلمة المرور هنا">
+        
+        <div class="options">
+            <label>Longueur du Mot de Passe:
+                <input type="number" id="length" value="12" min="4" max="20">
+            </label>
+        </div>
+
+        <div class="options">
+            <label><input type="checkbox" id="include-numbers" checked> Chiffres</label>
+        </div>
+
+        <button class="generate-btn" onclick="generatePassword()">Générer un Mot de Passe</button>
+    </div>
+
+    <script>
+        function generatePassword() {
+            const length = document.getElementById('length').value;
+            const includeNumbers = document.getElementById('include-numbers').checked;
+
+            let characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            if (includeNumbers) characters += "0123456789";
+            let password = "";
+            for (let i = 0; i < length; i++) {
+                const randomIndex = Math.floor(Math.random() * characters.length);
+                password += characters[randomIndex];
+            }
+
+            document.getElementById('password-display').value = password;
+        }
+    </script>
+
+</body>
+</html>
